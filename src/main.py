@@ -2,7 +2,7 @@ import pandas as pd
 
 def load_csv(file_path):
     try:
-        df = pd.read_csv(file_path)
+        df = pd.read_csv(file_path, header=1, sep=';')
         return df
     except FileNotFoundError:
         print(f"File '{file_path}' not found")
@@ -12,11 +12,12 @@ def load_csv(file_path):
         return None
 
 def process_data(df):
-    pass
+    print(df.shape)
+    print(df.head())
 
 def main():
-    csv_path = 'data/alerts.csv'
-    df = load_csv(csv_path)
+    csv_file = '../alerts.csv' # use 'data/alerts.csv' for your project
+    df = load_csv(csv_file)
     if df is None:
         return
     process_data(df)
