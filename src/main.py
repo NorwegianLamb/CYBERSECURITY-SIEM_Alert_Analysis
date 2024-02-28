@@ -1,3 +1,9 @@
+"""
+Author: Flavio Gjoni
+Status: IN-PROGRESS
+Description: This python project will be a translation of the main.ps1 powershell script, 
+which parses a CSV containing cybersecurity alerts and matches them with users' properties retrieved from ADUC
+"""
 import pandas as pd
 
 def load_csv(file_path):
