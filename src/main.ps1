@@ -1,3 +1,10 @@
+<#
+Author: Flavio Gjoni
+Status: IN-PROGRESS
+Description: Parsing a CSV file, cleaning it (need to add the handling for missing values and so on),
+and retrieving users' properties from the ADUC to check for SUSPICIOUS cybersecurity alarms
+#>
+
 function Load-Csv {
     param (
         [string]$filePath
