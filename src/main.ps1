@@ -97,7 +97,7 @@ function Process-Data {
 
 
 function Main {
-    $csvFile = 'path_to_alerts.csv' # INSERIRE IL PROPRIO PERCORSO
+    $csvFile = 'path_to\alerts.csv' # INSERIRE IL PROPRIO PERCORSO
     $df = Load-Csv -filePath $csvFile
 
     if ($null -eq $df) {
@@ -106,11 +106,11 @@ function Main {
 
     Process-Data -df $df
 
-    $df | Export-Csv -Path 'path_to_filtered_alerts_all.csv' -NoTypeInformation
+    $df | Export-Csv -Path 'path_to\filtered_alerts_all.csv' -NoTypeInformation
 
     $dfNotMatch = $df | Where-Object { $_.CountryMatched -eq 'Not Match' }
 
-    $dfNotMatch | Export-Csv -Path 'path_to_filtered_alerts_notMatch.csv' -NoTypeInformation
+    $dfNotMatch | Export-Csv -Path 'path_to\filtered_alerts_notMatch.csv' -NoTypeInformation
 
     Write-Host "Export completato."
 }
