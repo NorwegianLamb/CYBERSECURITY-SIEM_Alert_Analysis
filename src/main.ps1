@@ -5,6 +5,7 @@ Description: Parsing a CSV file, cleaning it (need to add the handling for missi
 and retrieving users' properties from the ADUC to check for SUSPICIOUS cybersecurity alarms
 #>
 
+# This function is responsible for loading and preprocessing the CSV file and using the email to get the country code
 function Load-Csv {
     param (
         [string]$filePath
@@ -83,6 +84,7 @@ function Load-Csv {
 }
 
 
+# This function processes and displays information about the loaded CSV data
 function Process-Data {
     param (
         [object]$df
@@ -95,7 +97,7 @@ function Process-Data {
 }
 
 
-
+# Entry point, it loads the CSV file and after it has been processed it saves the new DF into 2 csv(s)
 function Main {
     $csvFile = 'path_to\alerts.csv' # INSERIRE IL PROPRIO PERCORSO
     $df = Load-Csv -filePath $csvFile
@@ -115,5 +117,5 @@ function Main {
     Write-Host "Export completato."
 }
 
-# Entry Point
+# Calling the entry point
 Main
