@@ -58,22 +58,14 @@ function Load-Csv {
                 if ($adUser) {
                     $properties['ADCountryName'] = $adUser.co
                 } else {
-                    # Parse the email to get name and surname
-                    $emailParts = $properties['source.user.email'] -split "@"
-                    $nameParts = $emailParts[0] -split "\."
-                    if ($nameParts.Count -eq 2) {
-                        $firstName = $nameParts[0]
-                        $lastName = $nameParts[1]
+                    # Extract the user logon name (name.surname) part from the email
+                    $userLogonName = $properties['source.user.email'] -split "@" | Select-Object -First 1
             
-                        # Attempt to find a user by first name and last name
-                        $adUsers = Get-ADUser -Filter "GivenName -eq '$firstName' -and Surname -eq '$lastName'" -Properties co
-                        
-                        # Check if exactly one user is found
-                        if ($adUsers -and $adUsers.Count -eq 1) {
-                            $properties['ADCountryName'] = $adUsers.co
-                        } else {
-                            $properties['ADCountryName'] = 'Manual'
-                        }
+                    # Attempt to find a user by user logon name
+                    $adUser = Get-ADUser -Filter "SamAccountName -eq '$userLogonName'" -Properties co -ErrorAction SilentlyContinue
+            
+                    if ($adUser) {
+                        $properties['ADCountryName'] = $adUser.co
                     } else {
                         $properties['ADCountryName'] = 'Manual'
                     }
@@ -96,7 +88,7 @@ function Load-Csv {
                 } else {
                     $properties['CountryMatched'] = 'Not Match'
                 }
-            }            
+            }                        
 
             New-Object -TypeName PSObject -Property $properties
         }
