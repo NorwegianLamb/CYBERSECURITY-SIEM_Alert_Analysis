@@ -1,0 +1,3 @@
+Column1;Column2;Column3;Column4;Column5;Column6;Column7;Column8;Column9;Column10
+@timestamp;source.ip;event.category;event.action;event.module;event.outcome;source.user.email;user.id;watcher.state;source.geo.country_name
+Feb 27, 2024 @ 15:34:20.000;0.0.0.0;authentication;user logged in;office365;success;<name>.<surname>@<domain>.com;<name>.<surname>@<domain>.com;not_seen;Italy
