@@ -74,7 +74,6 @@ function Load-Csv {
                 $properties['ADCountryName'] = 'No Email'
             }
             
-            # Set CountryMatched based on ADCountryName
             if ($properties['ADCountryName'] -eq 'Manual') {
                 $properties['CountryMatched'] = 'Manual'
             } elseif ($properties['ADCountryName'] -eq 'Not Found' -or $properties['ADCountryName'] -eq 'No Email') {
@@ -99,7 +98,6 @@ function Load-Csv {
         return $null
     }
 }
-
 
 # This function processes and displays information about the loaded CSV data
 function Process-Data {
