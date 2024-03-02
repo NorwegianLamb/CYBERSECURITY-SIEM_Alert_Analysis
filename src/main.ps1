@@ -58,20 +58,45 @@ function Load-Csv {
                 if ($adUser) {
                     $properties['ADCountryName'] = $adUser.co
                 } else {
-                    $properties['ADCountryName'] = 'Not Found'
+                    # Parse the email to get name and surname
+                    $emailParts = $properties['source.user.email'] -split "@"
+                    $nameParts = $emailParts[0] -split "\."
+                    if ($nameParts.Count -eq 2) {
+                        $firstName = $nameParts[0]
+                        $lastName = $nameParts[1]
+            
+                        # Attempt to find a user by first name and last name
+                        $adUsers = Get-ADUser -Filter "GivenName -eq '$firstName' -and Surname -eq '$lastName'" -Properties co
+                        
+                        # Check if exactly one user is found
+                        if ($adUsers -and $adUsers.Count -eq 1) {
+                            $properties['ADCountryName'] = $adUsers.co
+                        } else {
+                            $properties['ADCountryName'] = 'Manual'
+                        }
+                    } else {
+                        $properties['ADCountryName'] = 'Manual'
+                    }
                 }
             } else {
                 $properties['ADCountryName'] = 'No Email'
             }
-
-            $sourceCountryCode = Get-CountryCode -countryName $properties['source.geo.country_name']
-            $adCountryCode = Get-CountryCode -countryName $properties['ADCountryName']
-
-            if ($sourceCountryCode -eq $adCountryCode -or $properties['source.geo.country_name'] -eq $properties['ADCountryName']) {
-                $properties['CountryMatched'] = 'Match'
+            
+            # Set CountryMatched based on ADCountryName
+            if ($properties['ADCountryName'] -eq 'Manual') {
+                $properties['CountryMatched'] = 'Manual'
+            } elseif ($properties['ADCountryName'] -eq 'Not Found' -or $properties['ADCountryName'] -eq 'No Email') {
+                $properties['CountryMatched'] = $properties['ADCountryName']
             } else {
-                $properties['CountryMatched'] = 'Not Match'
-            }
+                $sourceCountryCode = Get-CountryCode -countryName $properties['source.geo.country_name']
+                $adCountryCode = Get-CountryCode -countryName $properties['ADCountryName']
+            
+                if ($sourceCountryCode -eq $adCountryCode -or $properties['source.geo.country_name'] -eq $properties['ADCountryName']) {
+                    $properties['CountryMatched'] = 'Match'
+                } else {
+                    $properties['CountryMatched'] = 'Not Match'
+                }
+            }            
 
             New-Object -TypeName PSObject -Property $properties
         }
