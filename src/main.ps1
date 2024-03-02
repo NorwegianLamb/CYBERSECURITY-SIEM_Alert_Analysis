@@ -111,10 +111,9 @@ function Process-Data {
     $df | Select-Object -Property '@timestamp', 'source.ip', 'source.user.email', 'watcher.state', 'source.geo.country_name', 'ADCountryName', 'CountryMatched' | Format-Table -AutoSize | Out-String -Width 2048 | Write-Host
 }
 
-
 # Entry point, it loads the CSV file and after it has been processed it saves the new DF into 2 csv(s)
 function Main {
-    $csvFile = 'path_to\alerts.csv' # INSERIRE IL PROPRIO PERCORSO
+    $csvFile = 'path_to\alerts.csv' # Insert own path to alerts.csv
     $df = Load-Csv -filePath $csvFile
 
     if ($null -eq $df) {
@@ -123,14 +122,18 @@ function Main {
 
     Process-Data -df $df
 
+    # Export all data
     $df | Export-Csv -Path 'path_to\filtered_alerts_all.csv' -NoTypeInformation
 
-    $dfNotMatch = $df | Where-Object { $_.CountryMatched -eq 'Not Match' }
+    # Filter for rows where CountryMatched is 'Not Match' OR 'Manual'
+    $dfNotMatchAndManual = $df | Where-Object { $_.CountryMatched -eq 'Not Match' -or $_.CountryMatched -eq 'Manual' }
 
-    $dfNotMatch | Export-Csv -Path 'path_to\filtered_alerts_notMatch.csv' -NoTypeInformation
+    # Export rows where CountryMatched is 'Not Match' OR 'Manual'
+    $dfNotMatchAndManual | Export-Csv -Path 'path_to\filtered_alerts_notMatch.csv' -NoTypeInformation
 
-    Write-Host "Export completato."
+    Write-Host "Export completed"
 }
+
 
 # Calling the entry point
 Main
