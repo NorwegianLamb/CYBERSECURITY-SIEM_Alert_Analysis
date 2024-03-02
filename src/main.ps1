@@ -122,13 +122,8 @@ function Main {
 
     Process-Data -df $df
 
-    # Export all data
     $df | Export-Csv -Path 'path_to\filtered_alerts_all.csv' -NoTypeInformation
-
-    # Filter for rows where CountryMatched is 'Not Match' OR 'Manual'
     $dfNotMatchAndManual = $df | Where-Object { $_.CountryMatched -eq 'Not Match' -or $_.CountryMatched -eq 'Manual' }
-
-    # Export rows where CountryMatched is 'Not Match' OR 'Manual'
     $dfNotMatchAndManual | Export-Csv -Path 'path_to\filtered_alerts_notMatch.csv' -NoTypeInformation
 
     Write-Host "Export completed"
