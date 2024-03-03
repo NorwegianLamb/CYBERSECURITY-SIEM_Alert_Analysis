@@ -6,7 +6,7 @@ Using python later on to work on the new CSVs to create graphs and (maybe) make 
 There is a fakesimil CSV file in the /data folder, substitute that with your own report or use it as a wireframe so no changes in the script will be required (eg. column names, data format).
 
 Here is the format of the DF we're using:
-...
+..
 
 ## ...
 [...]
