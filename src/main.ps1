@@ -39,13 +39,13 @@ function Load-Csv {
     try {
         $allLines = Get-Content -Path $filePath
 
-        $headers = $allLines[1] -split ';'
-        $dataRows = $allLines | Select-Object -Skip 2
+        $headers = $allLines[0] -split ','
+        $dataRows = $allLines | Select-Object -Skip 1
 
         $selectedColumns = @('@timestamp', 'source.ip', 'source.user.email', 'watcher.state', 'source.geo.country_name')
 
         $csvData = $dataRows | ForEach-Object {
-            $data = $_ -split ';'
+            $data = $_ -split ','
             $properties = [ordered]@{}
             for ($i = 0; $i -lt $headers.Length; $i++) {
                 if ($headers[$i] -in $selectedColumns) {
