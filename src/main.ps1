@@ -21,7 +21,6 @@ function Load-Csv {
     	'Portugal' = 'PT'
     	'Ireland' = 'IE'
     	'Bulgaria' = 'BG'
-        'Nigeria' = ''
     	# ... add manually
     }
 
