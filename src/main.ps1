@@ -11,7 +11,7 @@ function Load-Csv {
         [string]$filePath
     )
 
-    # Da mappare lista countries
+    # Countries list to be mapped
     $countryCodeMapping = @{
     	'Germany' = 'DE'
     	'Italy' = 'IT'
@@ -21,7 +21,8 @@ function Load-Csv {
     	'Portugal' = 'PT'
     	'Ireland' = 'IE'
     	'Bulgaria' = 'BG'
-    	# ... aggiungere manualmente per il momento
+        'Nigeria' = ''
+    	# ... add manually
     }
 
     function Get-CountryCode {
