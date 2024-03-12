@@ -3,6 +3,10 @@ Author: Flavio Gjoni
 Status: IN-PROGRESS
 Description: Parsing a CSV file, cleaning it (need to add the handling for missing values and so on),
 and retrieving users' properties from the ADUC to check for SUSPICIOUS cybersecurity alarms
+To-Do: 
+    - Solve problem with countries such as 'Czech" and "czech republic"
+    - Create a list with impropable countries (eg. countries where your company has no branch)
+    - ...
 #>
 
 # This function is responsible for loading and preprocessing the CSV file and using the email to get the country code
