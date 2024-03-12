@@ -1,20 +1,18 @@
-"""
-Author: Flavio Gjoni
-Status: DONE (?)
-Description: If you're encountering "ConstrainedLanguage" problems with the powershell script,
-you might not be able to load the csv/json files so you might want to add the countries "manually"
-"""
 import json
 
+# Load the JSON data from the specified file
 file_path = 'data/country_codes.json'
+
+# Load the JSON data from the file
 with open(file_path, 'r') as file:
     country_data_json = json.load(file)
 
-# Convert JSON to PowerShell hashtable format
-ps_hashtable_lines = []
+# Convert JSON to the PowerShell hashtable format
+ps_hashtable_entries = []
 for country in country_data_json:
-    line = "@{ \"name\" = \"" + country["name"] + "\"; \"alpha-2\" = \"" + country["alpha-2"] + "\"; \"country-code\" = \"" + country["country-code"] + "\" },"
-    ps_hashtable_lines.append(line)
+    entry = f"    '{country['name']}' = '{country['alpha-2']}'"
+    ps_hashtable_entries.append(entry)
 
-ps_hashtable_output = "\n".join(ps_hashtable_lines)
+# Join the entries into a single string for output
+ps_hashtable_output = "\n".join(ps_hashtable_entries)
 print(ps_hashtable_output)
