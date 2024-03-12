@@ -376,8 +376,8 @@ function Main {
     $dfNotMatchAndManual | Export-Csv -Path 'path_to\notMatched_alerts.csv' -NoTypeInformation
 
     # exporting the csv with countries that are not in $branchCountries
-    $dfNotSpecificCountries = $df | Where-Object { $branchCountries -notcontains $_.'source.geo.country_name'.Trim() }
-    $dfNotSpecificCountries | Export-Csv -Path 'path_to\notBranch_alerts.csv' -NoTypeInformation
+    $dfNotBranchCountries = $df | Where-Object { $branchCountries -notcontains $_.'source.geo.country_name'.Trim() }
+    $dfNotBranchCountries | Export-Csv -Path 'path_to\notBranch_alerts.csv' -NoTypeInformation
 
 
     Write-Host "Export completed"
