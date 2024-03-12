@@ -32,7 +32,7 @@ def plot_world_map(world, country_colors):
     ax = world.boundary.plot(edgecolor='black', linewidth=0.2, figsize=(15,10))
     world.plot(column='color', ax=ax, 
                legend=True, missing_kwds={'color': 'lightgrey'},
-               cmap='RdBu')
+               cmap='RdYlGn')
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     # ax.set_title('Mapped alerts around the world', size=18, weight='bold')
