@@ -369,14 +369,14 @@ function Main {
     Process-Data -df $df
 
     # Add countries where your company has branches in:
-    $branchCountries = @('Italy', '...')
+    $branchCountries = @('Italy', 'Germany', 'France', 'Spain', 'Czechia', 'United Kingdom', '...')
 
     $df | Export-Csv -Path 'path_to\all_alerts.csv' -NoTypeInformation
     $dfNotMatchAndManual = $df | Where-Object { $_.CountryMatched -eq 'Not Match' -or $_.CountryMatched -eq 'Manual' }
     $dfNotMatchAndManual | Export-Csv -Path 'path_to\notMatched_alerts.csv' -NoTypeInformation
 
     # exporting the csv with countries that are not in $branchCountries
-    $dfNotSpecificCountries = $df | Where-Object { $specificCountries -notcontains $_.'source.geo.country_name'.Trim() }
+    $dfNotSpecificCountries = $df | Where-Object { $branchCountries -notcontains $_.'source.geo.country_name'.Trim() }
     $dfNotSpecificCountries | Export-Csv -Path 'path_to\notBranch_alerts.csv' -NoTypeInformation
 
 
