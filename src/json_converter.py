@@ -1,3 +1,10 @@
+"""
+Author: Flavio Gjoni
+Status: DONE
+Description: converts the country_codes.json list into a readable format for the ps1 script.
+This is a workaround to the ConstrainedLanguage error in PS, it is not the fanciest but works :)
+"""
+
 import json
 
 file_path = 'data/country_codes.json'
