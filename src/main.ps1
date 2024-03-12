@@ -5,7 +5,8 @@ Description: Parsing a CSV file, cleaning it (need to add the handling for missi
 and retrieving users' properties from the ADUC to check for SUSPICIOUS cybersecurity alarms
 To-Do: 
     - Solve problem with countries such as 'Czech" and "czech republic"
-    - Create a list with impropable countries (eg. countries where your company has no branch)
+    - Create a list with countries with your company's presence
+    - Create a list with suspicious origin (eg. north korea, ...)
     - ...
 #>
 
