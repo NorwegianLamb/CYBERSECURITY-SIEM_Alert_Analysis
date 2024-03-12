@@ -370,13 +370,13 @@ function Main {
     # Add countries where your company has branches in:
     $branchCountries = @('Italy', '...')
 
-    $df | Export-Csv -Path 'path_to\filtered_alerts_all.csv' -NoTypeInformation
+    $df | Export-Csv -Path 'path_to\all_alerts.csv' -NoTypeInformation
     $dfNotMatchAndManual = $df | Where-Object { $_.CountryMatched -eq 'Not Match' -or $_.CountryMatched -eq 'Manual' }
-    $dfNotMatchAndManual | Export-Csv -Path 'path_to\filtered_alerts_notMatch.csv' -NoTypeInformation
+    $dfNotMatchAndManual | Export-Csv -Path 'path_to\notMatched_alerts.csv' -NoTypeInformation
 
     # exporting the csv with countries that are not in $branchCountries
     $dfNotSpecificCountries = $df | Where-Object { $specificCountries -notcontains $_.'source.geo.country_name'.Trim() }
-    $dfNotSpecificCountries | Export-Csv -Path 'path_to\filtered_alerts_not_specific_countries.csv' -NoTypeInformation
+    $dfNotSpecificCountries | Export-Csv -Path 'path_to\notBranch_alerts.csv' -NoTypeInformation
 
 
     Write-Host "Export completed"
