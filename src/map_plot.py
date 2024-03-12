@@ -1,7 +1,7 @@
 """
 Author: Flavio Gjoni
 Status: IN-PROGRESS
-Description: mapped csv
+Description: With this code we can map the filtered CSV with geopandas and have a visual look at it
 """
 import pandas as pd
 import geopandas as gpd
@@ -15,9 +15,9 @@ def load_data(filepath):
 def map_country_colors(df):
     def determine_color(group):
         if (group['CountryMatched'] == 'Match').all():
-            return 'green'  # All entries are 'Match'
+            return 'match'  # All entries are 'Match'
         else:
-            return 'orange'  # At least one entry is 'Not Match' or 'Manual'
+            return 'not match'  # At least one entry is 'Not Match' or 'Manual'
     
     return df.groupby('source.geo.country_name').apply(determine_color).reset_index(name='color')
 
@@ -28,10 +28,14 @@ def get_unmatched_countries(df, world):
     return dataset_countries - world_countries
 
 def plot_world_map(world, country_colors):
-    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
-    world.boundary.plot(ax=ax)
-    world.plot(column='color', ax=ax, legend=True, missing_kwds={'color': 'lightgrey'})
-    ax.set_axis_off()
+    # fig, ax = plt.subplots(1, figsize=(15, 10))
+    ax = world.boundary.plot(edgecolor='black', linewidth=0.2, figsize=(15,10))
+    world.plot(column='color', ax=ax, 
+               legend=True, missing_kwds={'color': 'lightgrey'},
+               cmap='RdBu')
+    ax.get_xaxis().set_visible(False)
+    ax.get_yaxis().set_visible(False)
+    # ax.set_title('Mapped alerts around the world', size=18, weight='bold')
     plt.show()
 
 def apply_known_country_mappings(df, mappings):
@@ -62,7 +66,7 @@ def main():
     plot_world_map(world, country_colors)
 
     # Save the figure if desired
-    # fig.savefig('world_map_colored_by_alert_status.png')
+    # fig.savefig('data\alerts_mapped.png')
 
 if __name__ == '__main__':
     main()
