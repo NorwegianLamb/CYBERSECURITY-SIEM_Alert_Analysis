@@ -30,12 +30,13 @@ def get_unmatched_countries(df, world):
 def plot_world_map(world, country_colors):
     # fig, ax = plt.subplots(1, figsize=(15, 10))
     ax = world.boundary.plot(edgecolor='black', linewidth=0.2, figsize=(15,10))
-    world.plot(column='color', ax=ax, 
+    world.plot(column='color', ax=ax,
                legend=True, missing_kwds={'color': 'lightgrey'},
-               cmap='RdYlGn')
+               cmap='seismic')
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     # ax.set_title('Mapped alerts around the world', size=18, weight='bold')
+    plt.gcf().canvas.manager.set_window_title('Alert Map')
     plt.show()
 
 def apply_known_country_mappings(df, mappings):
