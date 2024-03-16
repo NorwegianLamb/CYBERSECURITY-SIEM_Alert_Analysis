@@ -31,14 +31,17 @@ def hover_function(feature, dataframe):
     return matched_data.to_string()
 
 def plot_world_map(world, country_colors, df):
-    # fig, ax = plt.subplots(1, figsize=(15, 10))
-    ax = world.boundary.plot(edgecolor='black', linewidth=0.2, figsize=(15,10))
-    world.plot(column='color', ax=ax, 
+    fig, ax = plt.subplots(1, figsize=(15, 10))
+    world.boundary.plot(edgecolor='black', linewidth=0.2, ax=ax)
+    mapping = world.plot(column='color', ax=ax, 
                legend=True, missing_kwds={'color': 'lightgrey'}, 
                cmap='seismic')
 
-    cursor = mplcursors.cursor(ax, hover=True)
-    cursor.connect("add", lambda sel: sel.annotation.set_text(hover_function(sel.original_target, df)))
+    mplcursors.cursor(mapping, hover=True).connect(
+        "add", lambda sel: sel.annotation.set_text(
+            df[df['source.geo.country_name'] == sel.target['name']].to_string()
+        )
+    )
 
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
