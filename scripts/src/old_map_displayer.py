@@ -17,7 +17,7 @@ def map_country_colors(df):
         if (group['CountryMatched'] == 'Match').all():
             return 'match'  # All entries are 'Match'
         else:
-            return 'not match'  # At least one entry is 'Not Match' or 'Manual'.
+            return 'not match'  # At least one entry is 'Not Match' or 'Manual'
     return df.groupby('source.geo.country_name').apply(determine_color).reset_index(name='color')
 
 def get_unmatched_countries(df, world):
