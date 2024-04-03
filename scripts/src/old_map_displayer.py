@@ -61,7 +61,7 @@ def main():
         "Singapore": "Malaysia"  # Singapore // // // Malaysia // // // //
     }
 
-    df = load_data('..\\filtered_alerts_all.csv')
+    df = load_data('..\\all_alerts.csv')
     df = apply_known_country_mappings(df, known_country_mappings)
 
     country_colors = map_country_colors(df)
