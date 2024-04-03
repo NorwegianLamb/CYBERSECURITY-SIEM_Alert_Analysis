@@ -253,7 +253,7 @@ function Load-Csv {
         'Ukraine' = 'UA'
         'United Arab Emirates' = 'AE'
         'United Kingdom' = 'GB'
-        'United States of America' = 'US'
+        'United States' = 'US'
         'United States Minor Outlying Islands' = 'UM'
         'Uruguay' = 'UY'
         'Uzbekistan' = 'UZ'
@@ -268,7 +268,6 @@ function Load-Csv {
         'Zambia' = 'ZM'
         'Zimbabwe' = 'ZW'
     }
-
     function Get-CountryCode {
         param (
             [string]$countryName
