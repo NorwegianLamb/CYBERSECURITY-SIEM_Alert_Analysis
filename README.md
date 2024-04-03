@@ -1,7 +1,7 @@
-# CYBERSECURITY-SOAR_Alert_Analysis
-This is the first part of the SOAR project: we receive alerts and analyze them with a Powershell script, which will be responsable to find false positives and parse the results.
+# Cybersecurity Project: SIEM/Alert_Analysis
+This is the first part of the SIAM project: we receive alerts and analyze them with a Powershell script, which will be responsable to find false positives and parse the results.
 
-We then fetch the data in a website (SOAR interface) and use it as a functionality that enables the user to represent it graphically and better understand the situation.
+We then fetch the data in a website (SIAM interface) and use it as a functionality that enables the user to represent it graphically and better understand the situation.
 
 (There's also a python script that was the initial idea for the map visualization)
 
