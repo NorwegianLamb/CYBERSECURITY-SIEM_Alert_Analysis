@@ -2,6 +2,8 @@
 import {useState} from 'react';
 import Papa from 'papaparse';
 import './App.css';
+import DataTable from './components/DataTable';
+import Navbar from './components/Navbar';
 
 function App() {
 
@@ -22,31 +24,17 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header>
+        <Navbar />
+      </header>
+      <body className="App-body">
         {/*<img src={logo} className="App-logo" alt="logo" />*/}
         <p>
           SIEM/SOAR Test
         </p>
         <input type="file" accept=".csv" onChange={handleFileChange} />
-        <table>
-          <thead>
-            <tr>
-              {data[0] && Object.keys(data[0]).map((header) => (
-                <th key={header}>{header}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((row, index) => (
-              <tr key={index}>
-                {Object.values(row).map((value, index) => (
-                  <td key={index}>{value}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </header>
+        <DataTable data={data} />
+      </body>
     </div>
   );
 }
