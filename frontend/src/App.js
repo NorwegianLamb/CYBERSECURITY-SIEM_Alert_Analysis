@@ -7,6 +7,7 @@ import './App.css';
 import DataTable from './components/DataTable';
 import Navbar from './components/NavBar';
 import Test from './components/Test';
+import MapVisualizer from './components/MapVisualizer';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<Test />} />
           <Route path= "/alerts-visualizer" element={<DataTable data={data} 
             handleFileChange={handleFileChange} />} />
+          <Route path="/map-visualizer" element={<MapVisualizer/>} />
         </Routes>
       </body>
     </div>

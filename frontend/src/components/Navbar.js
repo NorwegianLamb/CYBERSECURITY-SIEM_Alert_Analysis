@@ -9,7 +9,7 @@ function Navbar() {
       <img className="logo" src={logo} alt="logo" />
       <nav className="navbar">
         <ul className="nav_links">
-          <li><a><Link to="/">SIEM analysis</Link></a></li>
+          <li><a><Link to="/">SIEM Homepage</Link></a></li>
           <li><a><Link to="/alerts-visualizer">Alerts Visualizer</Link></a></li>
           <li><a><Link to="/map-visualizer">Map Visualizer</Link></a></li>
         </ul>
