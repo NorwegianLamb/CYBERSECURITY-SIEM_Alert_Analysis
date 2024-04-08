@@ -1,9 +1,12 @@
 // import logo from './logo.png';
+import { BrowserRouter as Router} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import {useState} from 'react';
 import Papa from 'papaparse';
 import './App.css';
 import DataTable from './components/DataTable';
-import Navbar from './components/Navbar';
+import Navbar from './components/NavBar';
+import Test from './components/Test';
 
 function App() {
 
@@ -28,12 +31,11 @@ function App() {
         <Navbar />
       </header>
       <body className="App-body">
-        {/*<img src={logo} className="App-logo" alt="logo" />*/}
-        <p>
-          SIEM/SOAR Test
-        </p>
-        <input type="file" accept=".csv" onChange={handleFileChange} />
-        <DataTable data={data} />
+        <Routes>
+          <Route path="/" element={<Test />} />
+          <Route path= "/alerts-visualizer" element={<DataTable data={data} 
+            handleFileChange={handleFileChange} />} />
+        </Routes>
       </body>
     </div>
   );
