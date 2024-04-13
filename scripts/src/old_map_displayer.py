@@ -1,7 +1,7 @@
 """
 Author: Flavio Gjoni
 Status: IN-PROGRESS
-Description: With this code, we can map the filtered CSV with geopandas and have a visual look at it
+Description: With this code, we can map the filtered CSV with geopandas and have a visual look at it -
 """
 import pandas as pd
 import geopandas as gpd
